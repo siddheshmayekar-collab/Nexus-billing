@@ -893,18 +893,20 @@ function mergeRates(rows, rateMap) {
       MOP:               row['MOP'] !== undefined && row['MOP'] !== ''
                            ? row['MOP']
                            : (pay === 'Cash on Delivery' ? 'COD' : (pay ? 'PPD' : '')),
-      Commission_Perc:   row['Commission_Perc'] !== undefined && row['Commission_Perc'] !== ''
-                           ? numOf(row['Commission_Perc'])
-                           : (rates.Commission_Perc ?? 0),
-      PG_Charges:        row['PG_Charges']        !== undefined && row['PG_Charges'] !== ''
-                           ? numOf(row['PG_Charges'])
-                           : (rates.PG_Charges ?? 0),
-      Packaging_Charges: row['Packaging_Charges'] !== undefined && row['Packaging_Charges'] !== ''
-                           ? numOf(row['Packaging_Charges'])
-                           : (rates.Packaging_Charges ?? 0),
-      SLA_Charges:       row['SLA_Charges']       !== undefined && row['SLA_Charges'] !== ''
-                           ? numOf(row['SLA_Charges'])
-                           : (rates.SLA_Charges ?? 0)
+      Commission_Perc:   (row['Commission_Perc'] !== undefined && row['Commission_Perc'] !== '' && numOf(row['Commission_Perc']) !== 0)
+                     ? numOf(row['Commission_Perc'])
+                     : (rates.Commission_Perc ?? 0),
+      PG_Charges:        (row['PG_Charges'] !== undefined && row['PG_Charges'] !== '' && numOf(row['PG_Charges']) !== 0)
+                     ? numOf(row['PG_Charges'])
+                     : (rates.PG_Charges ?? 0),
+
+Packaging_Charges: (row['Packaging_Charges'] !== undefined && row['Packaging_Charges'] !== '' && numOf(row['Packaging_Charges']) !== 0)
+                     ? numOf(row['Packaging_Charges'])
+                     : (rates.Packaging_Charges ?? 0),
+
+SLA_Charges:       (row['SLA_Charges'] !== undefined && row['SLA_Charges'] !== '' && numOf(row['SLA_Charges']) !== 0)
+                     ? numOf(row['SLA_Charges'])
+                     : (rates.SLA_Charges ?? 0)
     };
   });
 }
